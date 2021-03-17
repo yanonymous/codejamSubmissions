@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+using namespace std;
+int num(char a)
+{
+    if(a=='0')
+    return 0;
+    else if(a=='1')
+    return 1;
+    else if(a=='2')
+    return 2;
+    else if(a=='3')
+    return 3;
+    else if(a=='4')
+    return 4;
+    else if(a=='5')
+    return 5;
+    else if(a=='6')
+    return 6;
+    else if(a=='7')
+    return 7;
+    else if(a=='8')
+    return 8;
+    return 9;
+}
+int main()
+{
+    int t;
+    cin>>t;
+    for(int test=1;test<=t;test++)
+    {
+        int n;
+        string s;
+        cin>>s;
+        //cout<<s<<endl;
+        string a="(";
+        string b=")";
+        string answer="";
+        int count=0;
+        int count1=0;
+        for(int i=0;i<s.size();i++)
+        {
+            if(num(s[i])==0 && count==0)
+            {
+                answer+="0";
+            }
+            else if(s[i]==s[i-1] && i>=1)
+            {
+                string temp(1,s[i]);
+                answer+=temp;
+            }
+            else if(i==0)
+            {
+                count+=num(s[i]);
+                for(int j=0;j<count;j++)
+                answer+=a;
+                answer+=s[i];
+            }
+            else if(num(s[i])<count)
+            {
+                for(int j=0;j<count-num(s[i]);j++)
+                {answer+=b;
+                    count1++;
+                }
+                count-=count1;
+                count1=0;
+                answer+=s[i];
+            }
+            else if(num(s[i])>count)
+            {
+                for(int j=0;j<abs(count-num(s[i]));j++)
+                {
+                    answer+=a;
+                    count1++;
+                }
+                count+=count1;
+                count1=0;
+                answer+=s[i];
+            }
+        }
+        for(int i=0;i<count;i++)
+        answer+=b;
+            cout<<"Case #"<<test<<": "<<answer<<endl;
+        
+    }
+}

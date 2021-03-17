@@ -1,0 +1,783 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define UNASSIGNED 0
+#define KK 100
+
+bool FindUnassignedLocation(int grid[KK][KK], 
+							int &row, int &col,int N); 
+bool isSafe(int grid[KK][KK], int row, 
+				int col, int num,int N);
+bool SolveSudoku(int grid[KK][KK],int N) 
+{ 
+	int row, col; 
+	if (!FindUnassignedLocation(grid, row, col,N)) 
+	return true; 
+	for (int num = 1; num <= N; num++) 
+	{ 
+		if (isSafe(grid, row, col, num,N)) 
+		{
+			grid[row][col] = num; 
+			if (SolveSudoku(grid,N)) 
+				return true; 
+			grid[row][col] = UNASSIGNED; 
+		} 
+	} 
+	return false; 
+}
+bool FindUnassignedLocation(int grid[KK][KK], 
+							int &row, int &col,int N) 
+{ 
+	for (row = 0; row < N; row++) 
+		for (col = 0; col < N; col++) 
+			if (grid[row][col] == UNASSIGNED) 
+				return true; 
+	return false; 
+} 
+
+bool UsedInRow(int grid[KK][KK], int row, int num,int N) 
+{ 
+	for (int col = 0; col < N; col++) 
+		if (grid[row][col] == num) 
+			return true; 
+	return false; 
+}
+bool UsedInCol(int grid[KK][KK], int col, int num,int N) 
+{ 
+	for (int row = 0; row < N; row++) 
+		if (grid[row][col] == num) 
+			return true; 
+	return false; 
+}
+bool isSafe(int grid[KK][KK], int row, 
+				int col, int num,int N) 
+{ 
+
+	return !UsedInRow(grid, row, num,N) && 
+		!UsedInCol(grid, col, num,N) &&
+			grid[row][col] == UNASSIGNED; 
+} 
+void printGrid(int grid[KK][KK],int N) 
+{ 
+	for (int row = 0; row < N; row++) 
+	{ 
+	for (int col = 0; col < N; col++) 
+			cout << grid[row][col] << " "; 
+		cout << endl; 
+	} 
+} 
+int main()
+{
+int test;
+cin>>test;
+    for(int testt=1;testt<=test;testt++)
+    {
+        int n,k;
+        cin>>n>>k;
+        int N=n;
+        int temp=-1;
+        vector<int>v;
+        for(long i=n;i<=n*n;i=i+n)
+        {
+            if(i==k)
+            {
+                temp=k;
+            }
+        }
+        if(temp==-1 && n<=3)
+        cout<<"Case #"<<testt<<": "<<"IMPOSSIBLE"<<endl;
+        else if(temp!=-1 && n<=3){
+            int a[100][100];
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            int dia=temp/n;
+            for(int i=0;i<n;i++)
+            a[i][i]=dia;
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        else if(n==4 && k==4){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        else if(n==4 && k==6){
+            int a[100][100];
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(1);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==7){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(2);
+            v.push_back(1);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==8){
+            int a[100][100];
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==9){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(2);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==10){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==11){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(1);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==12){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==13){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(3);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==14){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(3);
+            v.push_back(3);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==4 && k==16){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==5){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==7){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==8){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==9){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(1);
+            v.push_back(3);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+           // cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==10){
+            int a[100][100];
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==11){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==12){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(2);
+            v.push_back(2);
+            v.push_back(3);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==13){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(2);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            //cout<<endl;
+            }
+        }
+        
+        else if(n==5 && k==14){
+            int a[100][100];
+            v.push_back(1);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            
+            }
+        }
+        
+        else if(n==5 && k==15){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(3);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+
+            }
+        }
+        
+        else if(n==5 && k==16){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(4);
+            v.push_back(5);
+            v.push_back(1);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==17){
+            int a[100][100];
+            v.push_back(2);
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(4);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==18){
+            int a[100][100];
+            v.push_back(2);
+            v.push_back(3);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==19){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(3);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==20){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==21){
+            int a[100][100];
+            v.push_back(3);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(5);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else if(n==5 && k==22){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(5);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+    
+            }
+        }
+        
+        else if(n==5 && k==23){
+            int a[100][100];
+            v.push_back(4);
+            v.push_back(4);
+            v.push_back(5);
+            v.push_back(5);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+        
+            }
+        }
+        
+        else if(n==5 && k==25){
+            int a[100][100];
+            v.push_back(5);
+            v.push_back(5);
+            v.push_back(5);
+            v.push_back(5);
+            v.push_back(5);
+            memset(a, 0, sizeof(a[0][0]) * 100 * 100);
+            for(int i=0;i<n;i++)
+            a[i][i]=v[i];
+            if(SolveSudoku(a,n)==true)
+        {
+            cout<<"Case #"<<testt<<": "<<"POSSIBLE"<<endl;
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                 cout<<a[i][j]<<" ";
+                 cout<<endl;
+            }
+            }
+        }
+        
+        else
+        {
+            cout<<"Case #"<<testt<<": "<<"IMPOSSIBLE"<<endl;
+        }
+        
+    }
+}

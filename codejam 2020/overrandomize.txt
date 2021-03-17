@@ -1,0 +1,109 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define pb push_back
+#define mp make_pair
+#define rt return 0
+#define endln "\n"
+#define all(v) v.begin(), v.end()
+#define for1(i, a, b) for (long long int i = a; i < b; i++)
+#define for2(i, a, b) for (long long int i = a; i > b; i--)
+typedef long long int lli;
+typedef pair<lli, lli> pll;
+lli countDigit(long long n)
+{
+    lli count = 0;
+    while (n != 0)
+    {
+        n = n / 10;
+        ++count;
+    }
+    return count;
+}
+lli firstDigit(lli n)
+{
+    // Remove last digit from number
+    // till only one digit is left
+    while (n >= 10)
+        n /= 10;
+
+    // return the first digit
+    return n;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    lli t, t1 = 1;
+    cin >> t;
+    while (t--)
+    {
+        lli oo;
+        cin >> oo;
+        map<lli, lli> m;
+        map<lli, lli> cc;
+        map<lli, lli> f;
+        for1(i, 0, 10000)
+        {
+            lli k;
+            cin >> k;
+            string s;
+            cin >> s;
+            lli a = s.length();
+            lli b = countDigit(k);
+
+            for1(i, 0, a)
+            {
+                lli o = s[i] - 'A';
+                cc[o] += 1;
+                if (i == 0)
+                {
+                    f[o] += 1;
+                }
+            }
+            // cout << a << " " << b << endl;
+            if (a == b)
+            {
+                // cout << "1 " << endl;
+
+                lli o = s[0] - 'A';
+                lli u = firstDigit(k);
+                // lli u = k % p;
+                // cout << u << endl;
+                if (m[o] == 0 || m[o] > u)
+                {
+                    m[o] = u;
+                }
+            }
+        }
+        string ans;
+        for1(i, 0, 26)
+        {
+            if (cc[i] > 0 && f[i] == 0)
+            {
+                char c = i + 'A';
+                ans.pb(c);
+                break;
+            }
+        }
+        vector<pll> v;
+        for1(i, 0, 26)
+        {
+            if (f[i] > 0)
+            {
+                v.pb(mp(f[i], i));
+                char c = i + 'A';
+                // cout << c << " " << f[i] << endl;
+            }
+        }
+        sort(v.rbegin(), v.rend());
+        for1(i, 0, 9)
+        {
+            char c = v[i].second + 'A';
+            ans.pb(c);
+        }
+        cout << "Case #" << t1 << ": ";
+        cout << ans << endl;
+        t1 += 1;
+    }
+}

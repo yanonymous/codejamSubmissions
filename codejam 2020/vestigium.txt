@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long t;
+    cin>>t;
+    for(long casee=1;casee<=t;casee++)
+    {
+        long n;
+        cin>>n;
+        long a[n][n];
+        long trace=0;
+        long row=0;
+        long col=0;
+        set<long,greater<long>> st;
+        for(long i=0;i<n;i++){
+            st.clear();
+        for(long j=0;j<n;j++)
+           {
+               cin>>a[i][j];
+               st.insert(a[i][j]);
+           }
+           if(st.size()!=n)
+           row++;
+        }
+        for(long i=0;i<n;i++)
+        trace+=a[i][i];
+        long b[n][n];
+        for(long i=0;i<n;i++)
+        for(long j=0;j<n;j++)
+        b[i][j]=a[j][i];
+        //st.clear();
+        for(long i=0;i<n;i++)
+        {
+            st.clear();
+            for(long j=0;j<n;j++)
+            {
+                st.insert(b[i][j]);
+            }
+            if(st.size()!=n)
+            col++;
+        }
+        cout<<"Case #"<<casee<<": "<<trace<<" "<<row<<" "<<col<<endl;
+    }
+}
